@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeQuest STEM — Игровая платформа программирования и STEM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="skipToMain">Перейти к содержимому</a>
+
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <button class="brand" id="brandHomeBtn" type="button" aria-label="CodeQuest STEM">
+        <span class="brand-badge" aria-hidden="true">⚡</span>
+        <span class="brand-text">
+          <strong>CodeQuest</strong>
+          <span class="brand-sub">STEM City</span>
+        </span>
+      </button>
+
+      <nav class="main-nav" aria-label="Основная навигация" id="mainNav">
+        <button class="nav-btn active" data-view="game" type="button">
+          <span aria-hidden="true">🤖</span> <span data-i18n="navGame">Игра</span>
+        </button>
+        <button class="nav-btn" data-view="city" type="button">
+          <span aria-hidden="true">🗺️</span> <span data-i18n="navCity">Карта города</span>
+        </button>
+        <button class="nav-btn" data-view="acmp" type="button">
+          <span aria-hidden="true">🏆</span> <span data-i18n="navAcmp">Миссии ACMP</span>
+        </button>
+        <button class="nav-btn" data-view="courses" type="button">
+          <span aria-hidden="true">📚</span> <span data-i18n="navCourses">Курсы</span>
+        </button>
+        <button class="nav-btn" data-view="stem" type="button">
+          <span aria-hidden="true">🔬</span> <span data-i18n="navStem">STEM-проекты</span>
+        </button>
+        <button class="nav-btn" data-view="progress" type="button">
+          <span aria-hidden="true">📊</span> <span data-i18n="navProgress">Мой прогресс</span>
+        </button>
+      </nav>
+
+      <div class="topbar-controls">
+        <div class="xp-pill" id="xpPill" aria-live="polite">
+          <span class="xp-lvl" id="headerLevel">Lv.1</span>
+          <span class="xp-val" id="headerXp">0 XP</span>
+        </div>
+
+        <div class="lang-switch" role="group" aria-label="Язык интерфейса">
+          <button class="lang-btn" data-lang="kk" type="button">ҚАЗ</button>
+          <button class="lang-btn active" data-lang="ru" type="button">РУС</button>
+          <button class="lang-btn" data-lang="en" type="button">ENG</button>
+        </div>
+
+        <button class="icon-btn" id="motionToggleBtn" type="button" aria-pressed="false" title="Анимация">
+          <span aria-hidden="true">✨</span>
+        </button>
+        <button class="icon-btn" id="teacherToggleBtn" type="button" title="Экран учителя">
+          <span aria-hidden="true">👩‍🏫</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="container" role="main">
+    <!-- Hero / Dual Entry Banner -->
+    <section class="hero-card" id="heroBanner" aria-label="Быстрый старт">
+      <div class="hero-copy">
+        <span class="pill pill-sky" data-i18n="heroBadge">STEM-город цифровых систем</span>
+        <h1 data-i18n="heroTitle">Восстанови цифровой город кодом и наукой</h1>
+        <p data-i18n="heroDesc">Выполни первую команду за 30 секунд, проверь гипотезу в лаборатории и применяй программирование в реальных STEM-проектах.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" id="heroStartCodeBtn" type="button">
+            <span aria-hidden="true">🚀</span> <span data-i18n="entryCode">Учусь программировать</span>
+          </button>
+          <button class="btn btn-mint btn-lg" id="heroStartStemBtn" type="button">
+            <span aria-hidden="true">🌱</span> <span data-i18n="entryStem">Выбираю STEM-проект</span>
+          </button>
+        </div>
+      </div>
+      <div class="hero-stats" id="heroDistrictStrip"></div>
+    </section>
+
+    <!-- VIEW: GAME (Robot Expedition) -->
+    <section class="view-section active" id="view-game" aria-label="Экспедиция робота">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="robotTitle">Экспедиция робота по STEM-городу</h2>
+          <p class="muted" id="levelSubtitle"></p>
+        </div>
+        <div class="level-pills" id="levelSelector" role="tablist" aria-label="Уровни экспедиции"></div>
+      </div>
+
+      <!-- Mobile Tabs -->
+      <div class="mobile-tabs" role="tablist" aria-label="Панели игры">
+        <button class="mob-tab active" data-mob="task" type="button" data-i18n="tabTask">Задание</button>
+        <button class="mob-tab" data-mob="code" type="button" data-i18n="tabCode">Код</button>
+        <button class="mob-tab" data-mob="result" type="button" data-i18n="tabResult">Результат</button>
+      </div>
+
+      <div class="game-layout" id="gameLayout">
+        <!-- Left: Mission & Field -->
+        <div class="panel game-field-panel mob-pane active" data-pane="task result">
+          <div class="mission-brief" id="missionBrief"></div>
+
+          <div class="canvas-toolbar">
+            <span class="badge badge-sky" id="mapSwitchBadge"></span>
+            <button class="btn btn-sm btn-ghost" id="toggleMapBtn" type="button" hidden data-i18n="switchMap">Карта 1 / Карта 2</button>
+            <span class="sensor-readout" id="sensorReadout"></span>
+          </div>
+
+          <div class="grid-stage" id="robotGrid" role="img" aria-label="Игровое поле робота"></div>
+
+          <div class="action-bar">
+            <button class="btn btn-mint" id="btnRun" type="button">▶ <span data-i18n="btnRun">Запустить</span></button>
+            <button class="btn btn-sky" id="btnStep" type="button">⏭ <span data-i18n="btnStep">Шаг</span></button>
+            <button class="btn btn-warn" id="btnStop" type="button" disabled>⏹ <span data-i18n="btnStop">Остановить</span></button>
+            <button class="btn btn-violet" id="btnCheck" type="button">✓ <span data-i18n="btnCheck">Проверить</span></button>
+            <button class="btn btn-ghost" id="btnResetField" type="button">↺ <span data-i18n="btnResetField">Сбросить поле</span></button>
+            <button class="btn btn-outline-violet" id="btnOpenHintGame" type="button">💡 <span data-i18n="btnHint">Справочник</span></button>
+          </div>
+        </div>
+
+        <!-- Right: Blocks + Code Editor + Execution Log -->
+        <div class="panel game-code-panel mob-pane" data-pane="code">
+          <div class="editor-header">
+            <div class="editor-tabs">
+              <span class="badge badge-violet">Python</span>
+              <span class="muted small" id="activeLineIndicator"></span>
+            </div>
+            <button class="btn btn-sm btn-ghost" id="btnRestoreTemplate" type="button" data-i18n="btnTemplate">Восстановить шаблон</button>
+          </div>
+
+          <!-- Scratch-style Command Blocks (Level 1-2) -->
+          <div class="blocks-palette" id="blocksPalette" hidden>
+            <div class="blocks-label" data-i18n="blocksPrompt">Нажми на блоки команд — они добавят Python-код:</div>
+            <div class="blocks-row" id="blocksRow"></div>
+          </div>
+
+          <label class="sr-only" for="robotCodeEditor" data-i18n="codeEditorLabel">Редактор кода Python</label>
+          <textarea id="robotCodeEditor" class="code-editor" spellcheck="false" rows="10"></textarea>
+
+          <div class="feedback-box" id="robotFeedback" aria-live="polite"></div>
+
+          <div class="exec-log-wrap">
+            <div class="exec-log-title" data-i18n="execLogTitle">Журнал выполнения</div>
+            <div class="exec-log" id="robotExecLog"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: CITY MAP -->
+    <section class="view-section" id="view-city" aria-label="Карта STEM-города">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="cityTitle">Карта цифрового STEM-города</h2>
+          <p class="muted" data-i18n="cityDesc">Открывай новые районы, восстанавливая датчики, лаборатории и архивы. Пройденные миссии можно запускать повторно.</p>
+        </div>
+      </div>
+      <div class="city-map-grid" id="cityMapGrid"></div>
+    </section>
+
+    <!-- VIEW: ACMP MISSIONS -->
+    <section class="view-section" id="view-acmp" aria-label="Архив задач ACMP">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="acmpTitle">Архив миссий ACMP</h2>
+          <p class="muted" id="acmpMetaNote"></p>
+        </div>
+        <div class="acmp-import-wrap">
+          <label class="btn btn-sm btn-ghost" for="acmpImportFile">
+            📥 <span data-i18n="acmpImportBtn">Импорт JSON ACMP</span>
+          </label>
+          <input type="file" id="acmpImportFile" accept=".json" hidden />
+        </div>
+      </div>
+
+      <div class="acmp-themes-bar" id="acmpThemesBar"></div>
+
+      <div class="acmp-controls panel">
+        <input type="search" id="acmpSearch" class="input" placeholder="Поиск по номеру или названию..." data-i18n-placeholder="acmpSearchPh" />
+        <select id="acmpDiffFilter" class="select" aria-label="Сложность">
+          <option value="all" data-i18n="diffAll">Любая сложность</option>
+          <option value="easy">1% – 20%</option>
+          <option value="mid">21% – 45%</option>
+          <option value="hard">46% – 100%</option>
+        </select>
+        <select id="acmpSort" class="select" aria-label="Сортировка">
+          <option value="id" data-i18n="sortId">По номеру (ID)</option>
+          <option value="diff_asc" data-i18n="sortDiffAsc">Сложность ↑</option>
+          <option value="diff_desc" data-i18n="sortDiffDesc">Сложность ↓</option>
+        </select>
+        <div class="acmp-progress-pill" id="acmpProgressPill"></div>
+      </div>
+
+      <div class="acmp-grid" id="acmpList"></div>
+      <div class="pagination-bar" id="acmpPagination"></div>
+    </section>
+
+    <!-- VIEW: COURSES -->
+    <section class="view-section" id="view-courses" aria-label="Курсы программирования">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="coursesTitle">Маршруты обучения</h2>
+          <p class="muted" data-i18n="coursesDesc">Начни с Python с нуля или пройди короткую диагностику, чтобы подобрать сложность.</p>
+        </div>
+        <div class="course-entry-actions">
+          <button class="btn btn-primary btn-sm" id="btnStartFromZero" type="button" data-i18n="startFromZero">Начать с нуля (Python)</button>
+          <button class="btn btn-violet btn-sm" id="btnOpenDiag" type="button" data-i18n="checkYourself">Проверить себя</button>
+        </div>
+      </div>
+
+      <div class="courses-grid" id="coursesGrid"></div>
+
+      <div class="lesson-workspace panel" id="lessonWorkspace" hidden></div>
+    </section>
+
+    <!-- VIEW: STEM PROJECTS -->
+    <section class="view-section" id="view-stem" aria-label="STEM-проекты">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="stemTitle">Межпредметные STEM-проекты</h2>
+          <p class="muted" data-i18n="stemDesc">Исследуй данные, проверяй гипотезы в симуляторе и защищай решение по журналу проекта.</p>
+        </div>
+      </div>
+
+      <div class="stem-filters panel">
+        <select id="stemSubjectFilter" class="select" aria-label="Предмет">
+          <option value="all" data-i18n="filterAllSubjects">Все предметы</option>
+          <option value="biology" data-i18n="subjBio">Биология / Экология</option>
+          <option value="physics" data-i18n="subjPhys">Физика</option>
+          <option value="geography" data-i18n="subjGeo">География / Химия</option>
+          <option value="cs" data-i18n="subjCs">Информатика и данные</option>
+        </select>
+        <select id="stemDiffFilter" class="select" aria-label="Сложность проекта">
+          <option value="all" data-i18n="diffAll">Любая сложность</option>
+          <option value="guided" data-i18n="tierGuided">С опорой</option>
+          <option value="solo" data-i18n="tierSolo">Самостоятельно</option>
+          <option value="research" data-i18n="tierResearch">Исследовательский</option>
+        </select>
+        <select id="stemFormatFilter" class="select" aria-label="Формат">
+          <option value="all" data-i18n="formatAll">Виртуальный и очный</option>
+          <option value="virtual" data-i18n="formatVirtual">Виртуальный симулятор</option>
+          <option value="lab" data-i18n="formatLab">Урок + свои измерения</option>
+        </select>
+      </div>
+
+      <div class="stem-cards-grid" id="stemProjectsGrid"></div>
+      <div class="stem-lab-workspace panel" id="stemLabWorkspace" hidden></div>
+    </section>
+
+    <!-- VIEW: PROGRESS -->
+    <section class="view-section" id="view-progress" aria-label="Мой прогресс">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="progressTitle">Прогресс и достижения</h2>
+          <p class="muted" data-i18n="progressDesc">Автоматическая проверка миссий и ручные отметки ACMP учитываются отдельно.</p>
+        </div>
+      </div>
+      <div id="progressDashboard"></div>
+    </section>
+
+    <!-- VIEW: TEACHER SCREEN -->
+    <section class="view-section" id="view-teacher" aria-label="Экран учителя">
+      <div class="section-head">
+        <div>
+          <h2 data-i18n="teacherTitle">Кабинет учителя</h2>
+          <p class="muted" data-i18n="teacherDesc">Выдача STEM-проекта классу, рубрика оценивания и локальный экспорт журнала.</p>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="btnCloseTeacher" type="button" data-i18n="backToStudent">← Режим ученика</button>
+      </div>
+      <div id="teacherPanelContent"></div>
+    </section>
+  </main>
+
+  <!-- Gemini Guide Drawer -->
+  <aside class="hint-drawer" id="hintDrawer" aria-label="Учебный справочник" hidden>
+    <div class="hint-drawer-head">
+      <div>
+        <strong data-i18n="guideTitle">Справочник Gemini</strong>
+        <span class="badge badge-mint" id="guideModeBadge">Local</span>
+      </div>
+      <button class="icon-btn" id="closeHintDrawerBtn" type="button" aria-label="Закрыть справочник">✕</button>
+    </div>
+    <p class="muted small" data-i18n="guidePolicy">Даёт наводящий вопрос или следующий шаг. Не выдаёт готовый код и скрытые тесты.</p>
+    <div class="hint-context-tag" id="hintContextTag"></div>
+    <div class="hint-level-row">
+      <label class="small" data-i18n="hintLevelLabel">Глубина подсказки:</label>
+      <select id="hintLevelSelect" class="select select-sm">
+        <option value="1" data-i18n="hintLvl1">1 — Наводящий вопрос</option>
+        <option value="2" data-i18n="hintLvl2">2 — Объяснение понятия</option>
+        <option value="3" data-i18n="hintLvl3">3 — Что именно проверить</option>
+      </select>
+    </div>
+    <textarea id="hintQuestionInput" class="input" rows="3" maxlength="400" placeholder="Опиши, что не получается..."></textarea>
+    <label class="checkbox-row small">
+      <input type="checkbox" id="hintShareAttempt" checked />
+      <span data-i18n="hintShareAttempt">Приложить текущий фрагмент кода/попытки</span>
+    </label>
+    <button class="btn btn-violet btn-block" id="btnAskGuide" type="button" data-i18n="btnAskGuide">Получить подсказку</button>
+    <div class="hint-response" id="hintResponseBox" aria-live="polite"></div>
+  </aside>
+
+  <!-- Diagnostics Modal -->
+  <div class="modal-backdrop" id="diagModal" hidden role="dialog" aria-modal="true" aria-labelledby="diagModalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="diagModalTitle" data-i18n="diagTitle">Диагностика уровня</h3>
+        <button class="icon-btn" id="closeDiagBtn" type="button" aria-label="Закрыть">✕</button>
+      </div>
+      <div id="diagBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toastBox" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
