@@ -1,0 +1,114 @@
+{
+  "H_SEQ_1": {
+    "topic": "robot",
+    "stage": "sequence",
+    "level": 1,
+    "kk": "Робот қазір қай бағытқа қарап тұрғанын және мақсатқа дейін қанша бос тор бар екенін санап көр.",
+    "ru": "Посчитай, куда сейчас смотрит робот и сколько свободных клеток до цели на прямой.",
+    "en": "Count which way the robot is facing right now and how many free cells lie ahead to the target."
+  },
+  "H_SEQ_2": {
+    "topic": "robot",
+    "stage": "sequence",
+    "level": 2,
+    "kk": "Әр `move()` командасы роботты дәл 1 торға жылжытады, ал `turn_right()` тек бағытын 90°-қа өзгертеді.",
+    "ru": "Каждая команда `move()` сдвигает робота ровно на 1 клетку, а `turn_right()` только поворачивает его на 90° на месте.",
+    "en": "Each `move()` advances the robot by 1 cell, while `turn_right()` only rotates it 90° in place."
+  },
+  "H_SEQ_3": {
+    "topic": "robot",
+    "stage": "sequence",
+    "level": 3,
+    "kk": "«Қадам» (Шаг) батырмасын басып, роботтың қай жолда қабырғаға тірелетінін тексер.",
+    "ru": "Нажми «Шаг», чтобы увидеть, на какой именно строке робот упирается в стену или сворачивает рано.",
+    "en": "Press Step to see the exact line where the robot hits a wall or turns too early."
+  },
+  "H_LOOP_1": {
+    "topic": "robot",
+    "stage": "loops",
+    "level": 1,
+    "kk": "Бірдей командалар қатарынан неше рет қайталанып тұр? Соны `for` цикліне жинауға бола ма?",
+    "ru": "Сколько раз подряд повторяется одно и то же действие? Можно ли объединить его в цикл `for`?",
+    "en": "How many times does the same action repeat in a row? Can you group it into a `for` loop?"
+  },
+  "H_LOOP_2": {
+    "topic": "robot",
+    "stage": "loops",
+    "level": 2,
+    "kk": "`for i in range(N):` циклі ішіндегі шегініс (отступ) бар жолдарды дәл N рет орындайды.",
+    "ru": "Цикл `for i in range(N):` выполняет все строки с отступом под ним ровно N раз.",
+    "en": "`for i in range(N):` runs every indented line underneath it exactly N times."
+  },
+  "H_SENSOR_1": {
+    "topic": "robot",
+    "stage": "sensor",
+    "level": 1,
+    "kk": "Егер бағдарлама екі түрлі картада да жұмыс істеуі керек болса, қадам санын бекіту дұрыс па, әлде сенсормен тексеру керек пе?",
+    "ru": "Если программа должна пройти две разные карты, стоит ли жёстко задавать число шагов или лучше проверять датчик?",
+    "en": "If one program must pass two different maps, should you hardcode the step count or check the sensor?"
+  },
+  "H_SENSOR_2": {
+    "topic": "robot",
+    "stage": "sensor",
+    "level": 2,
+    "kk": "`while not at_goal():` циклі ішінде `if front_is_clear():` арқылы алдыңғы жол ашық па, соны тексер.",
+    "ru": "Внутри `while not at_goal():` проверяй `if front_is_clear():` — свободна ли клетка впереди, иначе поворачивай.",
+    "en": "Inside `while not at_goal():`, check `if front_is_clear():` to move forward when clear, or turn otherwise."
+  },
+  "H_BOUNDARY_1": {
+    "topic": "greenhouse",
+    "stage": "boundary",
+    "level": 1,
+    "kk": "Шекаралық мәндерді салыстырып көр: 34%, 35% және 36% кезінде суару қосыла ма?",
+    "ru": "Сравни соседние значения на границе: 34%, 35% и 36%. Должен ли включаться полив при ровно 35%?",
+    "en": "Compare neighboring boundary values: 34%, 35%, and 36%. Should watering trigger at exactly 35%?"
+  },
+  "H_BOUNDARY_2": {
+    "topic": "greenhouse",
+    "stage": "boundary",
+    "level": 2,
+    "kk": "`<` (қатаң кіші) және `<=` (кіші немесе тең) операторлары дәл шекарада (35%) әртүрлі нәтиже береді.",
+    "ru": "Операторы `<` (строго меньше) и `<=` (меньше или равно) дают разный результат ровно на пороге 35%.",
+    "en": "The `<` (strictly less) and `<=` (less or equal) operators behave differently right at the 35% threshold."
+  },
+  "H_THERMAL_1": {
+    "topic": "thermal",
+    "stage": "experiment",
+    "level": 1,
+    "kk": "Екі ыдысты салыстырғанда бастапқы температура, су көлемі және өлшеу интервалы бірдей болды ма?",
+    "ru": "Проверь контрольные переменные: одинаковы ли начальная температура, объём воды и интервал измерений для обеих ёмкостей?",
+    "en": "Check your control variables: are starting temperature, water volume, and time interval identical for both containers?"
+  },
+  "H_SQL_1": {
+    "topic": "sql",
+    "stage": "query",
+    "level": 1,
+    "kk": "Деректер жоғалған уақыт аралығын табу үшін `WHERE` шартын және `ORDER BY` сұрыптауын қолданып көр.",
+    "ru": "Чтобы найти момент пропадания показаний, отфильтруй записи через `WHERE` (например, `IS NULL` или по статусу) и отсортируй по времени.",
+    "en": "To locate missing readings, filter rows with `WHERE` (e.g., `IS NULL` or status) and sort by timestamp."
+  },
+  "H_CSS_1": {
+    "topic": "web",
+    "stage": "layout",
+    "level": 1,
+    "kk": "Элементтерді тор (Grid) бойынша орналастыру үшін контейнерге `display: grid` және бағандар санын тексер.",
+    "ru": "Для расстановки объектов по сетке проверь `display: grid`, `grid-template-columns` и координаты элемента.",
+    "en": "For grid placement, check `display: grid`, `grid-template-columns`, and the item's column/row span."
+  },
+  "H_GEN_1": {
+    "topic": "general",
+    "stage": "practice",
+    "level": 1,
+    "kk": "Есептің кіріс және шығыс мысалдарын салыстырып, алдымен ең қарапайым жағдайды қолмен тексеріп ал.",
+    "ru": "Сравни входной и выходной примеры: проследи вручную на самом маленьком тесте, как вход превращается в ответ.",
+    "en": "Compare the input and output examples: trace the smallest test case by hand to see how input maps to output."
+  },
+  "H_REFUSE_SPOILER": {
+    "topic": "guard",
+    "stage": "guard",
+    "level": 1,
+    "kk": "Справочник дайын кодты немесе толық шешімді бермейді. Қай қадамда қиналғаныңды жаз — келесі бағытты көрсетемін!",
+    "ru": "Справочник не выдаёт готовый код, последовательность команд или скрытые тесты. Напиши, на каком именно шаге возникло расхождение — подскажу, что проверить.",
+    "en": "The Guide never reveals full solutions, command sequences, or hidden tests. Share which step behaves unexpectedly and I'll suggest what to check next."
+  }
+}
